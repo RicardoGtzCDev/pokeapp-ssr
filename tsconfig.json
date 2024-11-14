@@ -27,6 +27,8 @@
     "paths": {
       "@pages/*": ["app/view/pages/*"],
       "@shared/*": ["app/view/shared/*"],
+      "@services/*": ["app/services/*"],
+      "@models/*": ["app/models/*"],
     }
   },
   "angularCompilerOptions": {
