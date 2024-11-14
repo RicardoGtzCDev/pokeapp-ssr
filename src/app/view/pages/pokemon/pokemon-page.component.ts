@@ -52,7 +52,7 @@ export default class PokemonPageComponent implements OnInit {
       this.pokemonId.set(+pokemonId);
       this._pokemonService.getPokemonById(+pokemonId);
     } catch (error) {
-      console.log('Alrta: pokemon no encontrado');
+      console.log('Alerta: pokemon no encontrado');
     }
   }
 }
