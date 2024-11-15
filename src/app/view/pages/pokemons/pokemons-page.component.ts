@@ -48,9 +48,9 @@ export default class PokemonsPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const queryPage = this._aRoute.snapshot.queryParamMap.get('page');
+    const numPage = this._aRoute.snapshot.paramMap.get('numPage');
     let page: number = 0;
-    if (queryPage && !isNaN(+queryPage)) { page = +queryPage - 1; }
+    if (numPage && !isNaN(+numPage)) { page = +numPage - 1; }
     this._loadPage(page);
 
     // setTimeout(() => {
@@ -72,6 +72,6 @@ export default class PokemonsPageComponent implements OnInit {
   }
 
   private _updateQueryParamPage(page: number) {
-    this._router.navigate([], { queryParams: { page } })
+    this._router.navigate(['/pokemons', 'page', page])
   }
 }

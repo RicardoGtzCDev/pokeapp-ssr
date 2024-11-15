@@ -40,14 +40,14 @@ export class PokemonsService {
       });
   }
 
-  public getPokemonById(pokemonId: number) {
-    const alreadyExists = pokemonId in this.pokemonsDetail;
+  public getPokemonByName(pokemonName: string) {
+    const alreadyExists = pokemonName in this.pokemonsDetail;
     if (!alreadyExists) {
       this._http.get<GetPokemonByIdResponse>(
-        `https://pokeapi.co/api/v2/pokemon/${pokemonId}`
+        `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
       ).subscribe({
         next: (response) => {
-          this.pokemonsDetail.update((current) => ({ ...current, [pokemonId]: response }));
+          this.pokemonsDetail.update((current) => ({ ...current, [pokemonName]: response }));
         },
         error: (error) => { throw Error(error) },
       })

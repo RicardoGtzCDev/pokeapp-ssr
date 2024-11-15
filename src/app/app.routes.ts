@@ -5,12 +5,17 @@ export const routes: Routes = [
     path: 'pokemons',
     children: [
       {
-        path: '',
+        path: 'page/:numPage',
         loadComponent: () => import('@pages/pokemons/pokemons-page.component'),
       },
       {
-        path: ':pokemonId',
+        path: ':pokemon',
         loadComponent: () => import('@pages/pokemon/pokemon-page.component'),
+      },
+      {
+        path: '',
+        redirectTo: 'page/1',
+        pathMatch: 'full'
       },
     ],
   },
@@ -28,7 +33,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/about',
+    redirectTo: '/pokemons',
     pathMatch: 'full'
   },
   {

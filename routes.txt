@@ -1,0 +1,15 @@
+/pokemons/1
+/pokemons/2
+/pokemons/3
+/pokemons/4
+/pokemons/5
+/pokemons/bulbasaur
+/pokemons/ivysaur
+/pokemons/venusaur
+/pokemons/charmander
+/pokemons/charmeleon
+/pokemons/page/1
+/pokemons/page/2
+/pokemons/page/3
+/pokemons/page/4
+/pokemons/page/5

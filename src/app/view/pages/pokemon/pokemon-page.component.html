@@ -1,8 +1,9 @@
-@if (!pokemon()) {
+@if (!pokemonDetail()) {
 <div class="flex justify-center">
   <h1 class="text-4xl font-bold capitalize my-5">Cargando...</h1>
 </div>
-} @else { @let pokemonAux = pokemon()!;
+} @else { @let pokemonAux = pokemonDetail()!;
+<!-- <pre>{{ pokemonAux | json}}</pre> -->
 <section class="flex flex-col justify-center">
   <div class="flex justify-center">
     <h1 class="text-4xl font-bold capitalize my-5">{{ pokemonAux.name }}</h1>
