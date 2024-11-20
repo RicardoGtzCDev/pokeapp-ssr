@@ -16,7 +16,6 @@
   const pages = pagesIds.map((pageId) => `/pokemons/page/${pageId}`);
   const fileContent = [...pokemonsById, ...pokemonsByName, ...pages].join('\n');
 
-
   fs.writeFileSync('routes.txt', fileContent)
 })()
 

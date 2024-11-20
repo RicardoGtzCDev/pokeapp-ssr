@@ -15,29 +15,25 @@ export class PokemonsService {
   private static readonly itemsPerPage = 20;
 
   public page = signal(-1);
+  public page$ = toObservable(this.page)
+    .pipe(
+      skip(1),
+      distinctUntilChanged(),
+      takeUntilDestroyed(),
+    );
   public pokemons: WritableSignal<SimplePokemon[]> = signal([]);
   public pokemonsDetail: WritableSignal<PokemonDetail> = signal({});
 
   constructor() {
-    toObservable(this.page)
-      .pipe(
-        skip(1),
-        distinctUntilChanged(),
-        takeUntilDestroyed(),
-      ).subscribe({
-        next: (page) => {
-          this._loadPage(page).pipe(
-            map((response) => response.results.map((result) => ({
-              id: parseInt(result.url.split('/').at(-2) ?? '0'),
-              ...result,
-            } satisfies SimplePokemon) as SimplePokemon)),
-          ).subscribe({
-            next: (response) => {
-              this.pokemons.set(response);
-            }
-          });
-        },
-      });
+    this.page$.subscribe({
+      next: (page) => {
+        this.loadPage(page).subscribe({
+          next: (response) => {
+            this.pokemons.set(response);
+          }
+        });
+      },
+    });
   }
 
   public getPokemonByName(pokemonName: string) {
@@ -49,21 +45,25 @@ export class PokemonsService {
         next: (response) => {
           this.pokemonsDetail.update((current) => ({ ...current, [pokemonName]: response }));
         },
-        error: (error) => { throw Error(error) },
+        error: () => { this.handleError() },
       })
     }
   }
 
-  private _loadPage(page: number): Observable<GetPokemonsResponse> {
+  public loadPage(page: number): Observable<SimplePokemon[]> {
     const offset = PokemonsService.itemsPerPage * page;
     const limit = PokemonsService.itemsPerPage;
     return this._http.get<GetPokemonsResponse>(
       `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
+    ).pipe(
+      map((response) => response.results.map((result) => ({
+        id: parseInt(result.url.split('/').at(-2) ?? '0'),
+        ...result,
+      } satisfies SimplePokemon) as SimplePokemon)),
     );
   }
 
-
-
-
-
+  public handleError() {
+    console.log('An error has ocurred');
+  }
 }

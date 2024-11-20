@@ -1,4 +1,3 @@
-import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Meta, Title } from '@angular/platform-browser';
@@ -8,7 +7,7 @@ import { PokemonsService } from '@services/pokemons.service';
 @Component({
   selector: 'pokemon-page',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [],
   templateUrl: './pokemon-page.component.html',
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush
