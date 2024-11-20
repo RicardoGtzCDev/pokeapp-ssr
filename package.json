@@ -4,11 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run test:cicd && npm run prerender:routes && ng build",
+    "build": "npm run prerender:routes && ng build",
+    "build:test": "npm run test:cicd && npm run prerender:routes && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:cicd": "npm install puppeteer --save-dev && npm run addpupeeteer && ng test --no-watch --no-progress --browsers=ChromeHeadless",
-    "addpupeeteer": "echo CHROME_BIN=${PWD}/node_modules/puppeteer/.local-chromium/$(ls -x -1 ${PWD}/node_modules/puppeteer/.local-chromium)/chrome-linux/chrome",
+    "test:cicd": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
     "serve:ssr:2-pokemon-ssr": "node dist/2-pokemon-ssr/server/server.mjs",
     "prerender:routes": "node scripts/generate-prerender-routes.js"
   },
